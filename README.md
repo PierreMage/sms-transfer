@@ -1,4 +1,4 @@
-# Transfering iPhone SMS Android
+# Transfering iPhone SMS to Android
 
 Only works for iOS 6 SMS.
 
