@@ -1,4 +1,4 @@
-package smstransfer;
+package com.pma.smstransfer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

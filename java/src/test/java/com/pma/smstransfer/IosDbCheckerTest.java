@@ -1,4 +1,4 @@
-package smstransfer;
+package com.pma.smstransfer;
 
 import org.junit.Rule;
 import org.junit.Test;
