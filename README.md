@@ -4,6 +4,10 @@
 Only works with iOS 6 SMS.
 Only works with Android having the `sms://` content provider.
 
+## TODOs
+* Handling status other than "Inbox" and "Sent"
+* Handling attachments
+
 ## Rooting Android 
 http://forum.xda-developers.com/showthread.php?t=2018179
 http://wiki.cyanogenmod.org/w/Mako_Info
