@@ -9,8 +9,8 @@ Only works with Android having the `sms://` content provider.
 * Handling attachments
 
 ## Rooting Android 
-http://forum.xda-developers.com/showthread.php?t=2018179
-http://wiki.cyanogenmod.org/w/Mako_Info
+* http://forum.xda-developers.com/showthread.php?t=2018179
+* http://wiki.cyanogenmod.org/w/Mako_Info
 
 ## Useful links
 * http://faked.org/isms2droid/
