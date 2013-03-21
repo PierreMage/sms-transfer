@@ -1,9 +1,8 @@
 package com.pma.smstransfer;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public interface ResultSetProcessor {
 
-    void process(ResultSet resultSet) throws SQLException;
+    void process(ResultSet resultSet) throws Exception;
 }

@@ -1,5 +1,9 @@
 package com.pma.smstransfer;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,15 +20,27 @@ public class Main {
                     "WHERE m.handle_id = h.ROWID\n" +
                     "ORDER BY m.date";
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(final String[] args) throws ClassNotFoundException {
         QueryExecutor queryExecutor = new IosDbChecker().check(args[0]);
         queryExecutor.execute(QUERY, new ResultSetProcessor() {
-            public void process(ResultSet resultSet) throws SQLException {
+            public void process(ResultSet resultSet) throws SQLException, IOException {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(new File(args[1])));
+                String separator = args[2];
+                String newline = args[3];
                 while (resultSet.next()) {
                     String text = resultSet.getString("text");
-                    if (text != null && text.contains("|")) {
-                        System.err.println("| won't be a good separator!");
-                        break;
+                    if (text != null) {
+                        if (text.contains(separator)) {
+                            System.err.println(String.format("%s won't be a good separator!", separator)); //TODO: add test
+                            break;
+                        }
+                        if (text.contains(newline)) {
+                            System.err.println(String.format("%s won't be a good newline replacement!", newline)); //TODO: add test
+                            break;
+                        }
+                    }
+                    if (text != null) {
+                        text = text.replaceAll("\n", newline);
                     }
                     StringBuilder builder = new StringBuilder();
                     builder.append(resultSet.getString("contact_number")).append("|");
@@ -32,8 +48,10 @@ public class Main {
                     builder.append(resultSet.getString("is_from_me")).append("|");
                     builder.append(text).append("|");
                     builder.append(resultSet.getString("has_attachments"));
-                    System.out.println(builder.toString());
+                    writer.write(builder.toString());
+                    writer.newLine();
                 }
+                writer.close();
             }
         });
     }

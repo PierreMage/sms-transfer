@@ -22,7 +22,7 @@ public class QueryExecutor {
             statement.setQueryTimeout(30);
             ResultSet resultSet = statement.executeQuery(query);
             resultSetProcessor.process(resultSet);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         } finally {
             try {
