@@ -35,6 +35,10 @@ public class QueryExecutor {
         }
     }
 
+    public String getJdbcUrl() {
+        return jdbcUrl;
+    }
+
     private String getJdbcUrl(String dbFilePath) {
         if (dbFilePath == null) {
             throw new IllegalArgumentException("dbFilePath cannot be null");
@@ -44,9 +48,5 @@ public class QueryExecutor {
             throw new IllegalArgumentException(String.format("%s does not exist", dbFilePath));
         }
         return String.format("jdbc:sqlite:%s", dbFilePath);
-    }
-
-    public String getJdbcUrl() {
-        return jdbcUrl;
     }
 }
