@@ -43,10 +43,10 @@ public class Main {
                         text = text.replaceAll("\n", newline);
                     }
                     StringBuilder builder = new StringBuilder();
-                    builder.append(resultSet.getString("contact_number")).append("|");
-                    builder.append(resultSet.getString("date")).append("|");
-                    builder.append(resultSet.getString("is_from_me")).append("|");
-                    builder.append(text).append("|");
+                    builder.append(resultSet.getString("contact_number")).append(separator);
+                    builder.append(resultSet.getString("date")).append(separator);
+                    builder.append(resultSet.getString("is_from_me")).append(separator);
+                    builder.append(text).append(separator);
                     builder.append(resultSet.getString("has_attachments"));
                     writer.write(builder.toString());
                     writer.newLine();
