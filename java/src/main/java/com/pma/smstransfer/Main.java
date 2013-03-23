@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static java.lang.String.format;
+
 public class Main {
 
     private static final String QUERY =
@@ -27,15 +29,19 @@ public class Main {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(new File(args[1])));
                 String separator = args[2];
                 String newline = args[3];
+                // Metadata
+                writer.write(format("separator:%s newline:%s", separator, newline));
+                writer.newLine();
+                // Messages
                 while (resultSet.next()) {
                     String text = resultSet.getString("text");
                     if (text != null) {
                         if (text.contains(separator)) {
-                            System.err.println(String.format("%s won't be a good separator!", separator)); //TODO: add test
+                            System.err.println(format("%s won't be a good separator!", separator)); //TODO: add test
                             break;
                         }
                         if (text.contains(newline)) {
-                            System.err.println(String.format("%s won't be a good newline replacement!", newline)); //TODO: add test
+                            System.err.println(format("%s won't be a good newline replacement!", newline)); //TODO: add test
                             break;
                         }
                     }
