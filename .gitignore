@@ -3,4 +3,7 @@
 *.class
 *.csv
 *.iml
+android/gen/
+android/local.properties
+android/out/
 java/target/
