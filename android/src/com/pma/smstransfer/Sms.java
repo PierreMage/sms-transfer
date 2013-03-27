@@ -1,6 +1,10 @@
 package com.pma.smstransfer;
 
+import android.net.Uri;
+
 public interface Sms {
+
+    Uri PROVIDER = Uri.parse("content://sms");
 
     // _id, thread_id, person, date_sent, protocol (GSM?), reply_path_present (anonymous?), subject (MMS?), service_center, locked, error_code
 
