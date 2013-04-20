@@ -4,17 +4,22 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class HomeActivity extends Activity {
+
+    private EditText testMessage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+        testMessage = (EditText) findViewById(R.id.testMessage);
     }
 
     public void insertTestSms(View v) {
         Intent insertTestSms = new Intent(this, InsertTestSmsService.class);
+        insertTestSms.putExtra(InsertTestSmsService.TEST_MESSAGE, testMessage.getText().toString());
         startService(insertTestSms);
     }
 

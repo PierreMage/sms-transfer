@@ -17,10 +17,14 @@ public class SmsRepository {
     }
 
     public void insertSms(String address, long date, int type, String body) {
+        insertSms(address, date, type, body, 1);
+    }
+
+    public void insertSms(String address, long date, int type, String body, int read) {
         ContentValues values = new ContentValues();
         values.put(Sms.ADDRESS, address);
         values.put(Sms.DATE, date);
-        values.put(Sms.READ, 1);
+        values.put(Sms.READ, read);
         values.put(Sms.STATUS, "-1");
         values.put(Sms.TYPE, type);
         values.put(Sms.BODY, body);
@@ -37,7 +41,7 @@ public class SmsRepository {
     }
 
     private boolean smsExists(ContentValues values) {
-        // just assume equality on date+address+type
+        // just assume equality on date + address + type
         Cursor c = context.getContentResolver().query(Sms.PROVIDER,
                 new String[]{"_id"},
                 "date = ? AND address = ? AND type = ?",

@@ -7,6 +7,8 @@ import java.util.Date;
 
 public class InsertTestSmsService extends IntentService {
 
+    public static final String TEST_MESSAGE = "test_message";
+
     private final SmsRepository smsRepository;
 
     public InsertTestSmsService() {
@@ -16,6 +18,6 @@ public class InsertTestSmsService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        smsRepository.insertSms("0123456789", new Date().getTime(), Sms.MESSAGE_TYPE_SENT, "Hello World!");
+        smsRepository.insertSms("0123456789", new Date().getTime(), Sms.MESSAGE_TYPE_INBOX, intent.getStringExtra(TEST_MESSAGE), 0);
     }
 }
