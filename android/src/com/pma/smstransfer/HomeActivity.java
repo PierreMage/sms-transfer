@@ -21,6 +21,7 @@ public class HomeActivity extends Activity {
         Intent insertTestSms = new Intent(this, InsertTestSmsService.class);
         insertTestSms.putExtra(InsertTestSmsService.TEST_MESSAGE, testMessage.getText().toString());
         startService(insertTestSms);
+        openSmsInbox();
     }
 
     public void importIos6Sms(View v) {
@@ -28,5 +29,12 @@ public class HomeActivity extends Activity {
         Intent importIos6Sms = new Intent(this, ImportIos6SmsService.class);
         importIos6Sms.putExtra(ImportIos6SmsService.FILENAME, "sms.csv");
         startService(importIos6Sms);
+        openSmsInbox();
+    }
+
+    private void openSmsInbox() {
+        Intent openSmsInbox = new Intent(Intent.ACTION_MAIN);
+        openSmsInbox.setType("vnd.android-dir/mms-sms");
+        startActivity(openSmsInbox);
     }
 }
