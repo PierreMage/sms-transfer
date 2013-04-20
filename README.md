@@ -1,12 +1,13 @@
 # Transfering iPhone SMS to Android
 
 ## Limitations
-* Only works with iOS 6 SMS.
-* Only works with Android having the `sms://` content provider.
+* Only works with iOS 6 SMS
+* Only works with Android having the `sms://` content provider
 
 ## TODOs
-* Handling status other than "Inbox" and "Sent"
-* Handling attachments
+* Add file picker
+* Show progress
+* Handle attachments
 
 ## Rooting Android 
 * http://forum.xda-developers.com/showthread.php?t=2018179
