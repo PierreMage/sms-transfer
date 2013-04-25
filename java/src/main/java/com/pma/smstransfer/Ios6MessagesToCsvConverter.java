@@ -28,14 +28,11 @@ public class Ios6MessagesToCsvConverter {
     private final String separator;
     private final String newlineReplacement;
 
-    public Ios6MessagesToCsvConverter(String[] args) throws ClassNotFoundException {
-        if (args.length != 4) {
-            throw new IllegalArgumentException("Expecting 4 arguments: dbFilePath, outputFilePath, separator and newlineReplacement");
-        }
-        this.queryExecutor = new QueryExecutor(args[0]);
-        this.outputFilePath = args[1];
-        this.separator = args[2];
-        this.newlineReplacement = args[3];
+    public Ios6MessagesToCsvConverter(String dbFilePath, String outputFilePath, String separator, String newlineReplacement) throws ClassNotFoundException {
+        this.queryExecutor = new QueryExecutor(dbFilePath);
+        this.outputFilePath = outputFilePath;
+        this.separator = separator;
+        this.newlineReplacement = newlineReplacement;
     }
 
     public void writeCsv() throws IOException {
