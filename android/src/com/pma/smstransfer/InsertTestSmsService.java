@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import java.util.Date;
 
+import static com.pma.smstransfer.Transitions.openSmsInbox;
+
 public class InsertTestSmsService extends IntentService {
 
     public static final String TEST_MESSAGE = "test_message";
@@ -19,5 +21,6 @@ public class InsertTestSmsService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         smsRepository.insertSms("0123456789", new Date().getTime(), Sms.MESSAGE_TYPE_INBOX, intent.getStringExtra(TEST_MESSAGE), 0);
+        openSmsInbox(this);
     }
 }

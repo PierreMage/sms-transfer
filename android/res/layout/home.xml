@@ -13,7 +13,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hello World!"
-                android:hint="Enter Test Message"
+                android:hint="Test Message"
                 android:id="@+id/testMessage"/>
         <Button
                 android:layout_width="wrap_content"
@@ -26,10 +26,14 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Path to SMS file"
+                android:id="@+id/smsFilePath"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_column="1"
                 android:text="Import iOS 6 SMS"
                 android:onClick="importIos6Sms"/>
     </TableRow>
