@@ -5,7 +5,6 @@
 * Only works with Android having the `sms://` content provider
 
 ## TODOs
-* Move sqlite file processing in the Android application 
 * Add file picker
 * Show progress
 * Handle attachments

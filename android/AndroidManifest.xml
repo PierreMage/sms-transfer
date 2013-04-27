@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <service android:name=".InsertTestSmsService"/>
-        <service android:name=".ImportIos6SmsService"/>
+        <service android:name=".ImportIos6SmsFromSqliteFileService"/>
+        <service android:name=".ImportIos6SmsFromCsvFileService"/>
     </application>
 </manifest>

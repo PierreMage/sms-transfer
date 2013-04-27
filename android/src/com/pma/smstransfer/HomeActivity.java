@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 public class HomeActivity extends Activity {
 
+    private static final String DEFAULT_SMS_FILE_PATH = Environment.getExternalStorageDirectory() + "/sms.db";
+
     private EditText testMessage, smsFilePath;
 
     @Override
@@ -17,7 +19,7 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.home);
         testMessage = (EditText) findViewById(R.id.testMessage);
         smsFilePath = (EditText) findViewById(R.id.smsFilePath);
-        smsFilePath.setText(Environment.getExternalStorageDirectory() + "/sms.csv");
+        smsFilePath.setText(DEFAULT_SMS_FILE_PATH);
     }
 
     public void insertTestSms(View v) {
@@ -28,8 +30,8 @@ public class HomeActivity extends Activity {
 
     public void importIos6Sms(View v) {
         //TODO: add file chooser
-        Intent importIos6Sms = new Intent(this, ImportIos6SmsService.class);
-        importIos6Sms.putExtra(ImportIos6SmsService.FILE_PATH, smsFilePath.getText().toString());
+        Intent importIos6Sms = new Intent(this, ImportIos6SmsFromSqliteFileService.class);
+        importIos6Sms.putExtra(ImportIos6SmsFromSqliteFileService.DB_FILE_PATH, smsFilePath.getText().toString());
         startService(importIos6Sms);
     }
 }

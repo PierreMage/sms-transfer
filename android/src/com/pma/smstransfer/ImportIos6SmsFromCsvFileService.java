@@ -8,8 +8,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static com.pma.smstransfer.Transitions.openSmsInbox;
 import static java.lang.Integer.parseInt;
@@ -17,21 +15,20 @@ import static java.lang.Long.parseLong;
 import static java.lang.String.format;
 import static java.util.regex.Pattern.quote;
 
-public class ImportIos6SmsService extends IntentService {
+@Deprecated
+public class ImportIos6SmsFromCsvFileService extends IntentService {
 
     public static final String FILE_PATH = "file_path";
 
-    private static final String TAG = ImportIos6SmsService.class.getSimpleName();
+    private static final String TAG = ImportIos6SmsFromCsvFileService.class.getSimpleName();
     private static final long IOS_YEAR_0 = 978307200000L; // iPhone timestamps are in seconds starting from January 1 2001.
 
     private final SmsRepository smsRepository;
-    private final ExecutorService executorService;
     private final Handler handler;
 
-    public ImportIos6SmsService() {
-        super(ImportIos6SmsService.class.getName());
+    public ImportIos6SmsFromCsvFileService() {
+        super(ImportIos6SmsFromCsvFileService.class.getName());
         this.smsRepository = new SmsRepository(this);
-        this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         this.handler = new Handler();
     }
 
@@ -43,15 +40,19 @@ public class ImportIos6SmsService extends IntentService {
             importIos6Sms(filePath);
             openSmsInbox(this);
         } catch (FileNotFoundException e) {
-            handler.post(new Runnable() {
-                public void run() {
-                    Toast.makeText(ImportIos6SmsService.this, format("Could not find: %s", filePath), Toast.LENGTH_SHORT).show();
-                }
-            });
+            toast(format("Could not find: %s", filePath));
             logIOException(e);
         } catch (IOException e) {
             logIOException(e);
         }
+    }
+
+    private void toast(final String text) {
+        handler.post(new Runnable() {
+            public void run() {
+                Toast.makeText(ImportIos6SmsFromCsvFileService.this, text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void logIOException(IOException e) {
@@ -69,7 +70,7 @@ public class ImportIos6SmsService extends IntentService {
             }
             Metadata metadata = parseMetadata(line);
             while ((line = bufferedReader.readLine()) != null) {
-                executorService.execute(new InsertSmsRunnable(line, metadata.getSeparator(), metadata.getNewlineReplacement()));
+                insertSms(line, metadata.getSeparator(), metadata.getNewlineReplacement());
             }
         } finally {
             bufferedReader.close();
@@ -124,22 +125,6 @@ public class ImportIos6SmsService extends IntentService {
 
         public String getNumberOfMessages() {
             return numberOfMessages;
-        }
-    }
-
-    private class InsertSmsRunnable implements Runnable {
-        private final String line;
-        private final String separator;
-        private final String newlineReplacement;
-
-        public InsertSmsRunnable(String line, String separator, String newlineReplacement) {
-            this.line = line;
-            this.separator = separator;
-            this.newlineReplacement = newlineReplacement;
-        }
-
-        public void run() {
-            insertSms(line, separator, newlineReplacement);
         }
     }
 }
