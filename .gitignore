@@ -6,4 +6,5 @@
 android/gen/
 android/local.properties
 android/out/
+dev/
 java/target/
