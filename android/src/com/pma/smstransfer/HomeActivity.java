@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class HomeActivity extends Activity {
 
-    private static final String DEFAULT_SMS_FILE_PATH = Environment.getExternalStorageDirectory() + "/sms.db";
+    private static final String DEFAULT_SMS_FILE_PATH = Environment.getExternalStorageDirectory() + "/sms.sqlite";
 
     private EditText testMessage, smsFilePath;
 
