@@ -42,7 +42,7 @@ public class ImportIos6SmsFromSqliteFileService extends IntentService {
 
     private void importIos6Sms(String dbFilePath) {
         //TODO: PRAGMA journal_mode=DELETE
-        SQLiteDatabase sqLiteDatabase = SQLiteDatabase.openDatabase(dbFilePath, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+        SQLiteDatabase sqLiteDatabase = SQLiteDatabase.openDatabase(dbFilePath, null, SQLiteDatabase.OPEN_READONLY | SQLiteDatabase.NO_LOCALIZED_COLLATORS);
         Cursor cursor = sqLiteDatabase.rawQuery(QUERY, null);
         //TODO: show progress
         while (cursor.moveToNext()) {
